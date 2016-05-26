@@ -6,7 +6,7 @@ CFLAGS="-I. -Wall"
 DEPS = file_reader.h bf.h debug.h
 
 ODIR=obj
-_OBJS = file_reader.o bf.o
+_OBJS = main.o file_reader.o bf.o
 OBJS = $(patsubst %,$(ODIR)/%,$(_OBJS))
 
 $(ODIR)/%.o: %.c $(DEPS)

@@ -28,7 +28,7 @@ struct bf_context {
 	char	*prog; /* points to the buffer holding the program */
 	size_t	prog_size; /* the size of the program buffer */
 	char	*pc; /* program counter */
-	char	dp; /* data pointer */
+	char	*dp; /* data pointer */
 	char	data[DATA_SIZE]; /* data buffer */
 };
 

@@ -16,6 +16,7 @@ static inline void debug(const char *format, ...)
 {
 	if (DEBUG) {
 		va_list argp;
+
 		va_start(argp, format);
 		vdebug(format, argp);
 		va_end(argp);

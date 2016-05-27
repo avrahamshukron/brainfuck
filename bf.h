@@ -17,7 +17,7 @@
 #define JMP_IFZ_FWD '['
 #define JMP_NZ_BWD ']'
 
-#define DATA_SIZE (30 * 1024) // 30KB
+#define DATA_SIZE (30 * 1024) /* 30KB */
 
 enum status {
 	OK,

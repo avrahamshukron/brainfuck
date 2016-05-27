@@ -4,7 +4,7 @@
 #include "debug.h"
 #include "file_reader.h"
 
-void print_usage()
+void print_usage(void)
 {
 	debug("Brainfuck Executer.\n"
 		"Usage: bf <FILE_PATH>\n"

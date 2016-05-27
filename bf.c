@@ -7,13 +7,13 @@ void bf_init(struct bf_context *ctx, char *prog, size_t prog_size)
 {
 	debug("init\n");
 	int i;
+
 	ctx->prog = prog;
 	ctx->prog_size = prog_size;
-	ctx->pc = prog; // Sets the PC to the start of the program.
+	ctx->pc = prog; /* Sets the PC to the start of the program. */
 	ctx->dp = ctx->data;
-	for (i = 0; i < DATA_SIZE; i++) {
+	for (i = 0; i < DATA_SIZE; i++)
 		ctx->data[i] = 0;
-	}
 }
 
 static inline int bf_cmd_index(struct bf_context *ctx)
@@ -29,6 +29,7 @@ static inline int bf_data_index(struct bf_context *ctx)
 static inline int bf_has_ended(struct bf_context *ctx)
 {
 	int offset = bf_cmd_index(ctx);
+
 	return offset > ctx->prog_size || offset < 0;
 }
 
@@ -45,13 +46,13 @@ static inline void bf_move_dp(struct bf_context *ctx, int steps)
 void bf_jump(struct bf_context *ctx, char starter, char ender, int step)
 {
 	int stack = 1;
+
 	while (stack > 0 && !bf_has_ended(ctx)) {
 		bf_move_pc(ctx, step);
-		if (*ctx->pc == starter) {
+		if (*ctx->pc == starter)
 			stack++;
-		} else if (*ctx->pc == ender) {
+		else if (*ctx->pc == ender)
 			stack--;
-		}
 	}
 }
 
@@ -109,7 +110,7 @@ enum status bf_act(struct bf_context *ctx)
 		break;
 	default:
 		debug("Ignoring non-brainfuck character: %c\n", c);
-		// Ignore any non-command char.
+		/* Ignore any non-command char. */
 		break;
 	}
 	return ret;
@@ -119,9 +120,8 @@ void bf_run(struct bf_context *ctx)
 {
 	debug("running\n");
 	while (!bf_has_ended(ctx)) {
-		if (bf_act(ctx) == OK) {
+		if (bf_act(ctx) == OK)
 			bf_move_pc(ctx, STEP_FORWARD);
-		}
 	}
 	debug("finished\n");
 }

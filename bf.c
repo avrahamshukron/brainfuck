@@ -47,9 +47,9 @@ void bf_jump(struct bf_context *ctx, char starter, char ender, int step)
 	int stack = 1;
 	while (stack > 0 && !bf_has_ended(ctx)) {
 		bf_move_pc(ctx, step);
-		if (*(ctx->pc) == starter) {
+		if (*ctx->pc == starter) {
 			stack++;
-		} else if (*(ctx->pc) == ender) {
+		} else if (*ctx->pc == ender) {
 			stack--;
 		}
 	}
@@ -57,18 +57,18 @@ void bf_jump(struct bf_context *ctx, char starter, char ender, int step)
 
 enum status bf_jump_forward(struct bf_context *ctx)
 {
-	if (*(ctx->dp) == 0) {
-	bf_jump(ctx, BRACKET_OPEN, BRACKET_CLOSE, STEP_FORWARD);
-	return JUMPED;
+	if (*ctx->dp == 0) {
+		bf_jump(ctx, BRACKET_OPEN, BRACKET_CLOSE, STEP_FORWARD);
+		return JUMPED;
 	}
 	return OK;
 }
 
 enum status bf_jump_backward(struct bf_context *ctx)
 {
-	if (*(ctx->dp) != 0) {
+	if (*ctx->dp != 0) {
 		bf_jump(ctx, BRACKET_CLOSE, BRACKET_OPEN, STEP_BACKWARD);
-	return JUMPED;
+		return JUMPED;
 	}
 	return OK;
 }
@@ -76,8 +76,8 @@ enum status bf_jump_backward(struct bf_context *ctx)
 enum status bf_act(struct bf_context *ctx)
 {
 	enum status ret = OK;
-	char c = *(ctx->pc);
-	char d = *(ctx->dp);
+	char c = *ctx->pc;
+	char d = *ctx->dp;
 
 	debug("C[%i] = %c, D[%i] = %i\n",
 		bf_cmd_index(ctx), c, bf_data_index(ctx), d);
@@ -89,14 +89,14 @@ enum status bf_act(struct bf_context *ctx)
 		bf_move_dp(ctx, STEP_BACKWARD);
 		break;
 	case DATA_VAL_INC:
-		(*(ctx->dp))++;
+		(*ctx->dp)++;
 		break;
 	case DATA_VAL_DEC:
-		(*(ctx->dp))--;
+		(*ctx->dp)--;
 		break;
 	case DATA_VAL_IN:
-		*(ctx->dp) = getchar();
-		debug("Read character: %c\n", *(ctx->dp));
+		*ctx->dp = getchar();
+		debug("Read character: %c\n", *ctx->dp);
 		break;
 	case DATA_VAL_OUT:
 		putchar(d);

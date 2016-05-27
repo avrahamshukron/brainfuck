@@ -9,7 +9,10 @@ ODIR=obj
 _OBJS = main.o file_reader.o bf.o
 OBJS = $(patsubst %,$(ODIR)/%,$(_OBJS))
 
-$(ODIR)/%.o: %.c $(DEPS)
+$(ODIR):
+	mkdir $@
+
+$(ODIR)/%.o: %.c $(DEPS) $(ODIR)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(PROGNAME): $(OBJS)

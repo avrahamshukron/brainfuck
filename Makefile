@@ -9,6 +9,9 @@ ODIR=obj
 _OBJS = main.o file_reader.o bf.o
 OBJS = $(patsubst %,$(ODIR)/%,$(_OBJS))
 
+CHECKPATCH = ~/Development/C/checkpatch.pl
+CHECKPATCH_FLAGS = --no-tree -f
+
 $(ODIR):
 	mkdir $@
 
@@ -22,3 +25,6 @@ $(PROGNAME): $(OBJS)
 
 clean:
 	rm -f $(ODIR)/*.o *~ $(PROGNAME)
+
+check:
+	$(CHECKPATCH) $(CHECKPATCH_FLAGS) ./*.[ch]

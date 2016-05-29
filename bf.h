@@ -21,7 +21,9 @@
 
 enum status {
 	OK,
-	JUMPED
+	JUMPED,
+	DP_OUT_OF_BOUNDS,
+	PC_OUT_OF_BOUNDS,
 };
 
 struct bf_context {
@@ -33,6 +35,6 @@ struct bf_context {
 };
 
 void bf_init(struct bf_context *ctx, char *prog, size_t prog_size);
-void bf_run(struct bf_context *ctx);
+enum status bf_run(struct bf_context *ctx);
 
 #endif /* BF_H */

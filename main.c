@@ -26,6 +26,5 @@ int main(int argc, char *argv[])
 	prog_size = read_file(argv[1], &prog);
 	debug("Read program of size %zu\n", prog_size);
 	bf_init(&ctx, prog, prog_size);
-	bf_run(&ctx);
-	return 0;
+	return bf_run(&ctx);
 }
